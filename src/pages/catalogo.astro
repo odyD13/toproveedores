@@ -1,0 +1,166 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ProductCard from '../components/ProductCard.astro';
+
+// Datos de ejemplo para productos - En una aplicación real, estos vendrían de una API o CMS
+const products = [
+  {
+    name: "Producto Premium 1",
+    price: "$299",
+    image: "https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?auto=compress&cs=tinysrgb&w=600",
+    description: "Descripción detallada del producto premium con características excepcionales."
+  },
+  {
+    name: "Producto Exclusivo 2",
+    price: "$449", 
+    image: "https://images.pexels.com/photos/325876/pexels-photo-325876.jpeg?auto=compress&cs=tinysrgb&w=600",
+    description: "Producto exclusivo con diseño innovador y calidad superior."
+  },
+  {
+    name: "Producto Elite 3",
+    price: "$599",
+    image: "https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&w=600",
+    description: "Lo último en tecnología y diseño para los más exigentes."
+  },
+  {
+    name: "Producto Deluxe 4", 
+    price: "$199",
+    image: "https://images.pexels.com/photos/335257/pexels-photo-335257.jpeg?auto=compress&cs=tinysrgb&w=600",
+    description: "Perfecto equilibrio entre calidad, estilo y funcionalidad."
+  },
+  {
+    name: "Producto Superior 5",
+    price: "$379",
+    image: "https://images.pexels.com/photos/191999/pexels-photo-191999.jpeg?auto=compress&cs=tinysrgb&w=600", 
+    description: "Diseño premium con materiales de la más alta calidad."
+  },
+  {
+    name: "Producto Master 6",
+    price: "$689",
+    image: "https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&w=600",
+    description: "El producto más avanzado de nuestra línea premium."
+  },
+  {
+    name: "Producto Pro 7", 
+    price: "$259",
+    image: "https://images.pexels.com/photos/325153/pexels-photo-325153.jpeg?auto=compress&cs=tinysrgb&w=600",
+    description: "Profesional y confiable, ideal para uso intensivo."
+  },
+  {
+    name: "Producto Gold 8",
+    price: "$799",
+    image: "https://images.pexels.com/photos/279906/pexels-photo-279906.jpeg?auto=compress&cs=tinysrgb&w=600",
+    description: "La máxima expresión de lujo y sofisticación."
+  },
+  {
+    name: "Producto Select 9",
+    price: "$329",
+    image: "https://images.pexels.com/photos/341523/pexels-photo-341523.jpeg?auto=compress&cs=tinysrgb&w=600", 
+    description: "Cuidadosamente seleccionado por nuestros expertos."
+  }
+];
+---
+
+<Layout 
+  title="Catálogo - Toproveedores" 
+  description="Explora nuestro catálogo completo de productos premium. Calidad excepcional y diseños exclusivos te esperan."
+  keywords="catálogo, productos, premium, comprar, toproveedores"
+>
+  <!-- Header Section -->
+  <section class="py-12 sm:py-16 md:py-20 bg-gradient-to-br from-dark-bg via-dark-secondary to-dark-bg">
+    <div class="container mx-auto px-4 sm:px-6">
+      <div class="text-center">
+        <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 sm:mb-6">
+          Nuestro <span class="text-gold">Catálogo</span>
+        </h1>
+        <p class="text-lg sm:text-xl text-gray-300 max-w-3xl mx-auto mb-6 sm:mb-8 px-4">
+          Descubre nuestra selección de productos a disposición del consumidor. Cada artículo representa lo mejor en calidad, diseño y funcionalidad.
+        </p>
+        
+        <!-- Filter/Search Section -->
+        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center max-w-2xl mx-auto">
+          <div class="relative flex-1 w-full sm:w-auto">
+            <input 
+              type="text" 
+              placeholder="Buscar productos..."
+              class="w-full px-4 py-3 pl-12 bg-dark-accent border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-gold transition-colors"
+            />
+            <svg class="w-5 h-5 text-gray-400 absolute left-4 top-1/2 transform -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+          </div>
+          <select class="px-4 py-3 bg-dark-accent border border-gray-600 rounded-lg text-white focus:outline-none focus:border-gold transition-colors">
+            <option value="">Todas las categorías</option>
+            <option value="premium">Ropa</option>
+            <option value="exclusivo">Accesorios</option>
+            <option value="elite">Calzado</option>
+            <option value="deluxe">Tecnología</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Products Grid -->
+  <section class="py-12 sm:py-16 md:py-20 bg-dark-bg">
+    <div class="container mx-auto px-4 sm:px-6">
+      <!-- Products Count & Sort -->
+      <div class="flex flex-col sm:flex-row justify-between items-center mb-8 sm:mb-12">
+        <p class="text-gray-400 mb-4 sm:mb-0 text-sm sm:text-base">
+          Mostrando <span class="text-gold font-semibold">{products.length}</span> productos
+        </p>
+        <select class="w-full sm:w-auto px-3 sm:px-4 py-2 bg-dark-accent border border-gray-600 rounded-lg text-white text-sm sm:text-base focus:outline-none focus:border-gold transition-colors">
+          <option value="">Ordenar por</option>
+          <option value="price-low">Precio: Menor a Mayor</option>
+          <option value="price-high">Precio: Mayor a Menor</option>
+          <option value="name">Nombre A-Z</option>
+        </select>
+      </div>
+      
+      <!-- Products Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
+        {products.map((product) => (
+          <ProductCard 
+            name={product.name}
+            price={product.price}
+            image={product.image}
+            description={product.description}
+          />
+        ))}
+      </div>
+      
+      <!-- Load More Button -->
+      <div class="text-center mt-10 sm:mt-16">
+        <button class="w-full sm:w-auto bg-gold/10 text-gold px-6 sm:px-8 py-3 sm:py-4 rounded-lg border border-gold hover:bg-gold hover:text-dark-bg transition-all duration-300 text-sm sm:text-base font-semibold">
+          Cargar Más Productos
+        </button>
+      </div>
+    </div>
+  </section>
+  
+  <!-- CTA Section -->
+  <section class="py-20 bg-dark-secondary">
+    <div class="container mx-auto px-6 text-center">
+      <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">
+        ¿No encontraste lo que buscas?
+      </h2>
+      <p class="text-gray-300 text-lg mb-8 max-w-2xl mx-auto">
+        Contáctanos y te ayudaremos a encontrar exactamente lo que necesitas. Nuestro equipo está aquí para asistirte.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a 
+          href="/contacto" 
+          class="bg-gold text-dark-bg px-8 py-4 rounded-lg font-semibold hover:bg-gold/90 transition-all transform hover:scale-105 shadow-lg"
+        >
+          Contactar Ahora
+        </a>
+        <a 
+          href="/" 
+          class="border border-gold text-gold px-8 py-4 rounded-lg font-semibold hover:bg-gold hover:text-dark-bg transition-all"
+        >
+          Volver al Inicio
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>
